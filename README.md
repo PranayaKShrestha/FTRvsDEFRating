@@ -15,3 +15,6 @@ Linear Regression:
 
 Quadratic Regression:
 ![image](https://github.com/user-attachments/assets/5c77682a-f6a8-4a1f-9b8d-447f6127eb0d)
+
+
+**next step is find the defensive rating when FTR < mean(FTR) vs FTR < mean(FTR)
