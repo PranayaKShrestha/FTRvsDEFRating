@@ -43,28 +43,6 @@ As we can see from the regression summary, the large sample of games (47k+ games
 Due to the issues of game-log statisitcs and its randomness, I decided to look at each teams season's statistics. 
 
 
-===============================================
-                        Dependent variable:    
-                    ---------------------------
-                            def_rating         
------------------------------------------------
-freethrow_rate               -0.370***         
-                              (0.038)          
-                                               
-NET_RATING                   -0.432***         
-                              (0.030)          
-                                               
-Constant                    118.337***         
-                              (1.068)          
-                                               
------------------------------------------------
-Observations                    600            
-R2                             0.354           
-Adjusted R2                    0.352           
-Residual Std. Error      3.537 (df = 597)      
-F Statistic          163.393*** (df = 2; 597)  
-===============================================
-Note:               *p<0.1; **p<0.05; ***p<0.01
 
 
 ![image](https://github.com/user-attachments/assets/c46f7300-c160-4128-8295-52e67e161798)
