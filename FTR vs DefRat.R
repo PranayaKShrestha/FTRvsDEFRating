@@ -69,8 +69,8 @@ ggplot(game_log_def_FTR_05_24, aes(x=FTR_Group, y = DEF_RATING, fill = FTR_Group
   theme_classic() +
   theme(plot.title = element_text(size = 15, hjust=0.5))
 
-summary(lm(DEF_RATING ~ FTR ,
-              data = game_log_def_FTR_05_24))
+game_log_reg <- lm(DEF_RATING ~ FTR ,data = game_log_def_FTR_05_24)
+summary(game_log_reg)
 
 
 dat = data.frame(Team_ID = 0, Team = "",  #dummy data frame
@@ -98,6 +98,11 @@ for (i in 1:20) {
 }
 
 dat <- dat[-c(1),] 
+
+summary(lm(NET_RATING ~ freethrow_rate, data = dat))
+cor(dat$freethrow_rate,dat$W_PCT)
+plot(dat$freethrow_rate,dat$NET_RAT)
+
 
 #Regression model with NET_Rating
 regression_net_ftr <- lm(def_rating ~ freethrow_rate + NET_RATING,
@@ -137,19 +142,32 @@ weak_net_rating <- dat %>% filter(QualityTier == 'Weak')
 average_net_rating <- dat %>% filter(QualityTier == 'Average')
 strong_net_rating <- dat %>% filter(QualityTier == 'Strong')
 
-regression_weak <- lm(def_rating ~ freethrow_rate + NET_RATING, dat = weak_net_rating)
-regression_avg <- lm(def_rating ~ freethrow_rate + NET_RATING, dat = average_net_rating)
-regression_str <- lm(def_rating ~ freethrow_rate + NET_RATING, dat = strong_net_rating)
+regression_weak <- lm(def_rating ~ freethrow_rate , dat = weak_net_rating)
+regression_avg <- lm(def_rating ~ freethrow_rate, dat = average_net_rating)
+regression_str <- lm(def_rating ~ freethrow_rate, dat = strong_net_rating)
 summary(regression_weak)
 summary(regression_avg)
 summary(regression_str)
 
 dat <- dat %>% filter(!is.na(QualityTier))
 
+r2_by_tier <- dat %>%
+  group_by(QualityTier) %>%
+  do({
+    model = lm(def_rating ~ freethrow_rate, data = .)
+    data.frame(R2 = summary(model)$r.squared)
+  })
+r2_by_tier <- r2_by_tier %>%
+  mutate(
+    label = paste0("R² = ", round(R2, 3))
+  )
+
 ggplot(dat, aes(x = freethrow_rate, y = def_rating, color = QualityTier)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "lm", se = FALSE) +
   facet_wrap(~QualityTier) +
+  geom_text(data = r2_by_tier, aes(x = 38, y = 118, label = label), 
+            inherit.aes = FALSE, color = "red", size = 5) +
   labs(title = "FTr vs Defensive Rating by Team Quality Tier",
        x = "Free Throw Rate", y = "Defensive Rating") +
   theme_minimal() +
@@ -199,7 +217,7 @@ ggplot(dat, aes(x=freethrow_rate, y = def_rating)) +
     color = "red",
     linewidth = 1
   ) +
-  labs(title ="Team Free Throw Rate vs Team Defensive Rating ",
+  labs(title ="Team Free Throw Rate vs Team Defensive Rating (Quadratic)",
        subtitle = "Since 2005-2006 Season",
        x = "Free Throw Rate",
        y = "Defensive Rating") +
