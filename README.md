@@ -44,6 +44,8 @@ To better understand how the relationship between Free Throw Rate (FTr) and Defe
 
 
 
+Now, to isolate the impact of free throw rate further, I then ran a simplified model using only FTr to predict Defensive Rating. The analysis revealed a statistically significant but relatively small negative relationship, indicating that teams with higher free-throw rates tend to have slightly better defensive ratings. 
+
 
 
 
