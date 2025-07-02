@@ -25,7 +25,7 @@ As we can see from the regression summary, the large sample of games (47k+ games
 
 Due to the issues with game-log statistics and their randomness, I decided to examine each team's season statistics. 
 
-Initially, I questioned whether teams with high free-throw rates were simply strong overall teams, and whether their lower defensive ratings were more a reflection of general team quality rather than a meaningful relationship with free-throw rate — suggesting that free-throw rate may be a confounding factor rather than a true driver of defensive performance. However, a simple regression output where Net Rating is the response variable and free throw rate is the explanatory variable shows there is not any relationship (the low R² indicates that it is not a strong determinant of overall team performance). 
+Initially, I questioned whether teams with high free-throw rates were simply strong overall teams, and whether their lower defensive ratings were more a reflection of general team quality rather than a meaningful relationship with free-throw rate, suggesting that free-throw rate may be a confounding factor rather than a true driver of defensive performance. However, a simple regression output where Net Rating is the response variable and free throw rate is the explanatory variable shows there is not any relationship (the low R² indicates that it is not a strong determinant of overall team performance). 
 
 ![image](https://github.com/user-attachments/assets/f842951b-c578-4491-95ca-ad3d17162071)
 
@@ -37,11 +37,9 @@ Furthermore, I investigated the relationship between Defensive Rating and Free T
 ![image](https://github.com/user-attachments/assets/c46f7300-c160-4128-8295-52e67e161798)
 
 
-To better understand how the relationship between Free Throw Rate (FTr) and Defensive Rating varies by team quality, I stratified the dataset into three tiers—Weak, Average, and Strong—based on each team’s season-level Net Rating. Using quantile-based thresholds, teams in the bottom third were labeled as Weak, the middle third as Average, and the top third as Strong. I then ran separate multiple linear regression models within each tier, using both FTr and Net Rating as predictors of Defensive Rating. The results showed that FTr was a statistically significant predictor across all three tiers, suggesting that even among weaker or stronger teams, drawing more fouls is modestly associated with better defensive performance. Interestingly, the strength of the relationship between Net Rating and Defensive Rating varied by tier, being more impactful for Strong and Weak teams but less so for Average teams (p-value = 0.27).
+To better understand how the relationship between Free Throw Rate (FTr) and Defensive Rating varies by team quality, I stratified the dataset into three tiers—Weak, Average, and Strong—based on each team’s season-level Net Rating. Using quantile-based thresholds, teams in the bottom third were labeled as Weak, the middle third as Average, and the top third as Strong. I then ran separate multiple linear regression models within each tier, using  FTr as a predictor of Defensive Rating. The results showed that FTr was a statistically significant predictor across all three tiers, suggesting that even among weaker or stronger teams, drawing more fouls is modestly associated with better defensive performance. However, the R-squared of the model slightly decreases as the tier increases, suggesting 'Strong' teams are less reliant on FTr for defense.
 
-
-![image](https://github.com/user-attachments/assets/d46cfb9b-b982-4d6e-9e3b-c36b06cb8b94)
-
+![image](https://github.com/user-attachments/assets/647d50e0-5b6b-4892-821d-cf63d9c3c717)
 
 
 Now, to isolate the impact of free throw rate further, I then ran a simplified model using only FTr to predict Defensive Rating. FTr had a statistically significant negative coefficient of -0.417 (p < 0.001). This model alone explained 13% of the variance in Defensive Rating (R2 = 0.1305). Compared to the previous model with Net Rating, this demonstrates that FTr is not merely a proxy for good teams, but rather an independent predictor of defensive performance. 
@@ -51,8 +49,13 @@ Now, to isolate the impact of free throw rate further, I then ran a simplified m
 ![image](https://github.com/user-attachments/assets/ca24029c-33a5-4a65-9f76-deacf3885620)
 
 
+# 🏀Conclusion
 
+The findings show that while free-throw rate (FTr) doesn't meaningfully explain defensive performance on a game-to-game basis due to high variability, the relationship becomes much clearer when looking at season-level data. Over nearly 20 years of NBA team stats, teams with higher season-long FTr tended to have better defensive ratings. This relationship remained statistically significant even after accounting for team quality through Net Rating, suggesting that FTr is not just something good teams happen to do—it stands on its own as a meaningful predictor of defensive success.
 
+When teams were grouped by quality (Weak, Average, and Strong), the connection between FTr and defensive rating held across all three tiers. This supports the idea that getting to the free-throw line may actually help a team's defense by slowing down the game, limiting fast breaks, and creating more chances to get set in the half-court.
+
+Overall, this project shows that free-throw rate isn't just an offensive stat. It plays a subtle but important role in team defense and could provide valuable insights for coaches considering how physical play and drawing fouls can benefit both ends of the floor.
 
 
 
