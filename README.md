@@ -40,6 +40,10 @@ Furthermore, I investigated the relationship between Defensive Rating and Free T
 To better understand how the relationship between Free Throw Rate (FTr) and Defensive Rating varies by team quality, I stratified the dataset into three tiers—Weak, Average, and Strong—based on each team’s season-level Net Rating. Using quantile-based thresholds, teams in the bottom third were labeled as Weak, the middle third as Average, and the top third as Strong. I then ran separate multiple linear regression models within each tier, using both FTr and Net Rating as predictors of Defensive Rating. The results showed that FTr was a statistically significant predictor across all three tiers, suggesting that even among weaker or stronger teams, drawing more fouls is modestly associated with better defensive performance. Interestingly, the strength of the relationship between Net Rating and Defensive Rating varied by tier, being more impactful for Strong and Weak teams but less so for Average teams (p-value = 0.27).
 
 
+![image](https://github.com/user-attachments/assets/f51eb781-c79c-4172-9018-a881eaf47a15)
+
+
+
 
 
 
